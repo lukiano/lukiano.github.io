@@ -7,6 +7,16 @@
     <title>Luciano Leggieri | Portfolio</title>
     <link rel="stylesheet" href="https://unpkg.com/98.css" />
     <style>
+        /* The distributed 98.css inlines its colors and borders, so custom UI needs its own tokens. */
+        :root {
+            --surface: #c0c0c0;
+            --text-color: #222;
+            --border-raised-outer: inset -1px -1px #0a0a0a, inset 1px 1px #fff;
+            --border-raised-inner: inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+            --border-sunken-outer: inset -1px -1px #fff, inset 1px 1px #0a0a0a;
+            --border-sunken-inner: inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+            --border-status-field: inset -1px -1px #fff, inset 1px 1px #808080;
+        }
         * { box-sizing: border-box; }
         body { margin: 0; padding: 32px 16px 76px; background: #008080; font-family: "Pixelated MS Sans Serif", Arial, sans-serif; font-size: 11px; -webkit-font-smoothing: none; }
         main { width: 100%; max-width: 440px; margin: 0 auto; }
@@ -15,6 +25,10 @@
         .window-body { margin: 20px; line-height: 1.5; }
         .title-bar-text { margin: 0; font-size: inherit; }
         h1 { margin: 0 0 8px; font-size: 22px; }
+        .about-trigger { all: unset; font: inherit; color: inherit; cursor: help; }
+        .about-trigger:focus-visible { outline: 1px dotted #000; outline-offset: 4px; }
+        .system-heading { display: flex; align-items: center; gap: 16px; }
+        .system-heading strong { font-size: 22px; }
         .subtitle { margin: 0; }
         .window-body > p:first-child { margin-top: 0; }
         .window-body > p:last-child { margin-bottom: 0; }
@@ -68,7 +82,7 @@
                 <div class="title-bar-text">Luciano Leggieri — Portfolio</div>
             </div>
             <div class="window-body">
-                <h1>Luciano Leggieri</h1>
+                <h1><button type="button" class="about-trigger" id="about-computer-trigger" aria-haspopup="dialog" aria-controls="about-computer" aria-label="Luciano Leggieri — About this computer" title="Double-click for About this computer">Luciano Leggieri</button></h1>
                 <p class="subtitle">Staff Software Engineer · Distributed Systems &amp; Platforms</p>
             </div>
             <div class="status-bar">
@@ -185,6 +199,25 @@
         </section>
         <footer><p>&copy; 2026 Luciano Leggieri</p></footer>
     </main>
+    <dialog class="window work-dialog" id="about-computer" aria-labelledby="about-computer-title">
+        <div class="title-bar">
+            <h2 class="title-bar-text" id="about-computer-title">About this computer</h2>
+            <div class="title-bar-controls"><button type="button" aria-label="Close" data-close-dialog></button></div>
+        </div>
+        <div class="window-body">
+            <div class="system-heading">
+                <img class="pixel-icon" src="assets/icons/computer.svg" alt="" width="32" height="32">
+                <strong>Luciano OS</strong>
+            </div>
+            <p>Running since 1980</p>
+            <div class="field-border">
+                <p><strong>Registered to:</strong> Luciano Leggieri</p>
+                <p><strong>Specialties:</strong> Distributed systems, platform architecture, and enterprise data residency.</p>
+                <p><strong>System status:</strong> Still curious. Always learning.</p>
+            </div>
+            <form method="dialog" class="dialog-actions"><button autofocus>OK</button></form>
+        </div>
+    </dialog>
     <nav class="start-menu" id="start-menu" aria-label="Start navigation" hidden>
         <p class="start-menu-heading">Luciano's Portfolio</p>
         <a href="#about"><img class="pixel-icon" src="assets/icons/computer.svg" alt="" width="32" height="32">About Me</a>
@@ -238,6 +271,13 @@
             folder.addEventListener('click', () => {
                 document.getElementById(folder.dataset.project).showModal();
             });
+        });
+        const aboutComputerTrigger = document.getElementById('about-computer-trigger');
+        const aboutComputer = document.getElementById('about-computer');
+        aboutComputerTrigger.addEventListener('dblclick', () => aboutComputer.showModal());
+        // Keyboard and assistive-technology activation generates a click without a pointer count.
+        aboutComputerTrigger.addEventListener('click', (event) => {
+            if (event.detail === 0) aboutComputer.showModal();
         });
         document.querySelectorAll('[data-close-dialog]').forEach((button) => {
             button.addEventListener('click', () => button.closest('dialog').close());
