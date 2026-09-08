@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://unpkg.com/98.css" />
     <style>
         * { box-sizing: border-box; }
-        body { margin: 0; padding: 32px 16px; background: #008080; font-family: "Pixelated MS Sans Serif", Arial, sans-serif; font-size: 11px; -webkit-font-smoothing: none; }
+        body { margin: 0; padding: 32px 16px 76px; background: #008080; font-family: "Pixelated MS Sans Serif", Arial, sans-serif; font-size: 11px; -webkit-font-smoothing: none; }
         main { width: 100%; max-width: 440px; margin: 0 auto; }
         .window { margin-bottom: 24px; }
         /* Keep the library's native 11px size for its pixel font. */
@@ -23,13 +23,36 @@
         .skills-list { margin: 0; list-style: none; padding-left: 0; }
         .skills-list li + li { margin-top: 8px; }
         .links-list { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-        .contact-button { min-width: 90px; padding: 4px 12px; }
+        .contact-button { min-width: 90px; padding: 8px 12px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+        .pixel-icon { width: 32px; height: 32px; image-rendering: pixelated; flex-shrink: 0; }
+        .small-icon { width: 16px; height: 16px; }
+        section, header { scroll-margin-top: 16px; }
+        .explorer-address { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+        .explorer-address .field-border { padding: 3px 8px; flex: 1; }
+        .project-grid { display: flex; flex-wrap: wrap; gap: 20px; min-height: 110px; }
+        .project-folder { display: flex; flex-direction: column; align-items: center; gap: 6px; color: #000; width: 110px; text-align: center; text-decoration: none; }
+        .project-folder:hover span, .project-folder:focus-visible span { background: #000080; color: #fff; }
+        .project-folder span { padding: 2px 4px; }
+        .project-details { margin-top: 16px; }
+        .project-details summary { cursor: pointer; }
+        .project-details p { margin: 12px 0; }
+        .taskbar { position: fixed; z-index: 10; bottom: 0; left: 0; right: 0; display: flex; align-items: center; gap: 6px; padding: 4px; background: var(--surface); box-shadow: inset 0 1px #fff; }
+        .taskbar button { display: flex; align-items: center; gap: 6px; height: 28px; }
+        .start-button { font-weight: bold; }
+        .task-button { flex: 1; max-width: 220px; min-width: 0; background: #dfdfdf; box-shadow: var(--border-sunken-outer), var(--border-sunken-inner); }
+        .task-button span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .taskbar-clock { margin-left: auto; min-width: 72px; padding: 6px 8px; text-align: center; box-shadow: var(--border-status-field); }
+        .start-menu { position: fixed; z-index: 11; left: 4px; bottom: 40px; width: 220px; padding: 3px; background: var(--surface); box-shadow: var(--border-raised-outer), var(--border-raised-inner); }
+        .start-menu[hidden] { display: none; }
+        .start-menu-heading { margin: 0; padding: 10px; color: #fff; background: #000080; font-weight: bold; }
+        .start-menu a { display: flex; gap: 12px; align-items: center; padding: 10px; color: #000; text-decoration: none; }
+        .start-menu a:hover, .start-menu a:focus-visible { color: #fff; background: #000080; outline-offset: -3px; }
         a { overflow-wrap: anywhere; }
         a:focus-visible { outline: 2px dotted #000; outline-offset: 3px; }
         .status-bar-field { padding: 4px 8px; }
         footer { color: #fff; text-align: center; }
         @media (max-width: 480px) {
-            body { padding: 16px 8px; }
+            body { padding: 16px 8px 76px; }
             .window-body { margin: 14px; }
             .status-bar { flex-wrap: wrap; }
         }
@@ -37,7 +60,7 @@
 </head>
 <body>
     <main>
-        <header class="window">
+        <header class="window" id="home">
             <div class="title-bar">
                 <div class="title-bar-text">Luciano Leggieri — Portfolio</div>
             </div>
@@ -51,7 +74,7 @@
             </div>
         </header>
 
-        <section class="window" aria-labelledby="about-title">
+        <section class="window" id="about" aria-labelledby="about-title">
             <div class="title-bar">
                 <h2 class="title-bar-text" id="about-title">About Me</h2>
             </div>
@@ -63,7 +86,7 @@
             </div>
         </section>
 
-        <section class="window" aria-labelledby="skills-title">
+        <section class="window" id="expertise" aria-labelledby="skills-title">
             <div class="title-bar">
                 <h2 class="title-bar-text" id="skills-title">Core Expertise</h2>
             </div>
@@ -78,21 +101,102 @@
             </div>
         </section>
 
-        <section class="window" aria-labelledby="contact-title">
+        <section class="window" id="projects" aria-labelledby="projects-title">
+            <div class="title-bar">
+                <h2 class="title-bar-text" id="projects-title">Exploring — Projects</h2>
+            </div>
+            <div class="window-body">
+                <div class="explorer-address"><span>Address</span><div class="field-border">C:&#92;Portfolio&#92;Projects</div></div>
+                <div class="field-border project-grid">
+                    <a class="project-folder" href="#portfolio-project" data-project="portfolio-project"><img class="pixel-icon" src="assets/icons/folder.svg" alt="" width="32" height="32"><span>This portfolio</span></a>
+                    <a class="project-folder" href="https://github.com/lukiano?tab=repositories" target="_blank" rel="noopener noreferrer" aria-label="GitHub repositories (opens in a new tab or window)"><img class="pixel-icon" src="assets/icons/folder.svg" alt="" width="32" height="32"><span>GitHub repositories</span></a>
+                </div>
+                <details class="project-details" id="portfolio-project">
+                    <summary>This portfolio — details</summary>
+                    <p>A Windows 98-inspired personal website, built with HTML, 98.css, and JavaScript.</p>
+                    <a href="https://github.com/lukiano/lukiano.github.io" target="_blank" rel="noopener noreferrer">View repository (opens in a new tab or window)</a>
+                </details>
+            </div>
+            <div class="status-bar"><p class="status-bar-field">2 objects</p><p class="status-bar-field">Select a folder to explore</p></div>
+        </section>
+
+        <section class="window" id="contact" aria-labelledby="contact-title">
             <div class="title-bar">
                 <h2 class="title-bar-text" id="contact-title">Connect With Me</h2>
             </div>
             <div class="window-body">
                 <ul class="links-list">
-                    <li><button type="button" class="contact-button" data-url="https://github.com/lukiano" aria-label="GitHub (opens in a new tab or window)">GitHub</button></li>
-                    <li><button type="button" class="contact-button" data-url="https://www.linkedin.com/in/lucianoleggieri/" aria-label="LinkedIn (opens in a new tab or window)">LinkedIn</button></li>
-                    <li><button type="button" class="contact-button" data-url="mailto:luciano@lucianoleggieri.com" aria-label="Email Luciano (opens your email app)">Email</button></li>
+                    <li><button type="button" class="contact-button" data-url="https://github.com/lukiano" aria-label="GitHub (opens in a new tab or window)"><img class="pixel-icon" src="assets/icons/computer.svg" alt="" width="32" height="32"><span>GitHub</span></button></li>
+                    <li><button type="button" class="contact-button" data-url="https://www.linkedin.com/in/lucianoleggieri/" aria-label="LinkedIn (opens in a new tab or window)"><img class="pixel-icon" src="assets/icons/briefcase.svg" alt="" width="32" height="32"><span>LinkedIn</span></button></li>
+                    <li><button type="button" class="contact-button" data-url="mailto:luciano@lucianoleggieri.com" aria-label="Email Luciano (opens your email app)"><img class="pixel-icon" src="assets/icons/mail.svg" alt="" width="32" height="32"><span>Email</span></button></li>
                 </ul>
             </div>
         </section>
         <footer><p>&copy; 2026 Luciano Leggieri</p></footer>
     </main>
+    <nav class="start-menu" id="start-menu" aria-label="Start navigation" hidden>
+        <p class="start-menu-heading">Luciano's Portfolio</p>
+        <a href="#about"><img class="pixel-icon" src="assets/icons/computer.svg" alt="" width="32" height="32">About Me</a>
+        <a href="#expertise"><img class="pixel-icon" src="assets/icons/briefcase.svg" alt="" width="32" height="32">Core Expertise</a>
+        <a href="#projects"><img class="pixel-icon" src="assets/icons/folder.svg" alt="" width="32" height="32">Projects</a>
+        <a href="#contact"><img class="pixel-icon" src="assets/icons/mail.svg" alt="" width="32" height="32">Connect With Me</a>
+    </nav>
+    <div class="taskbar" aria-label="Desktop taskbar">
+        <button type="button" class="start-button" id="start-button" aria-expanded="false" aria-controls="start-menu"><img class="pixel-icon small-icon" src="assets/icons/computer.svg" alt="" width="16" height="16">Start</button>
+        <button type="button" class="task-button" id="portfolio-button" aria-label="Go to top of portfolio"><img class="pixel-icon small-icon" src="assets/icons/folder.svg" alt="" width="16" height="16"><span>Luciano's Portfolio</span></button>
+        <time class="taskbar-clock" id="clock" aria-label="Your local time"></time>
+    </div>
     <script>
+        const startButton = document.getElementById('start-button');
+        const startMenu = document.getElementById('start-menu');
+        function setStartOpen(open) {
+            startMenu.hidden = !open;
+            startButton.setAttribute('aria-expanded', String(open));
+        }
+        startButton.addEventListener('click', () => setStartOpen(startMenu.hidden));
+        startButton.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                setStartOpen(true);
+                startMenu.querySelector('a').focus();
+            }
+        });
+        document.addEventListener('click', (event) => {
+            if (!startMenu.contains(event.target) && !startButton.contains(event.target)) setStartOpen(false);
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !startMenu.hidden) {
+                setStartOpen(false);
+                startButton.focus();
+            }
+        });
+        function focusSection(id) {
+            const section = document.getElementById(id);
+            section.setAttribute('tabindex', '-1');
+            section.focus({ preventScroll: true });
+            section.scrollIntoView({ block: 'start' });
+        }
+        startMenu.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                setStartOpen(false);
+                focusSection(link.hash.slice(1));
+            });
+        });
+        document.getElementById('portfolio-button').addEventListener('click', () => focusSection('home'));
+        document.querySelectorAll('[data-project]').forEach((folder) => {
+            folder.addEventListener('click', () => {
+                document.getElementById(folder.dataset.project).open = true;
+            });
+        });
+        const clock = document.getElementById('clock');
+        function updateClock() {
+            const now = new Date();
+            clock.dateTime = now.toISOString();
+            clock.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            clock.title = now.toLocaleDateString([], { dateStyle: 'full' });
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
         document.querySelectorAll('.contact-button').forEach((button) => {
             button.addEventListener('click', () => {
                 window.open(button.dataset.url, '_blank', 'noopener,noreferrer');
