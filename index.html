@@ -3,172 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Luciano Leggieri — software engineer focused on distributed systems and platform infrastructure.">
     <title>Luciano Leggieri | Portfolio</title>
+    <link rel="stylesheet" href="https://unpkg.com/98.css" />
     <style>
-        :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --text-main: #c9d1d9;
-            --text-muted: #8b949e;
-            --accent: #58a6ff;
-            --border: #30363d;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 650px;
-            width: 100%;
-            padding: 2rem;
-            box-sizing: border-box;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin: 0 0 0.5rem 0;
-            letter-spacing: -0.5px;
-        }
-
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin: 0;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .card h2 {
-            font-size: 1.2rem;
-            margin-top: 0;
-            margin-bottom: 1rem;
-            color: var(--accent);
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        p {
-            margin: 0 0 1rem 0;
-            font-size: 1rem;
-        }
-
-        p:last-child {
-            margin-bottom: 0;
-        }
-
-        .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill-tag {
-            background-color: var(--bg-color);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 0.25rem 0.75rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
-        }
-
-        .links-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .links-list li {
-            margin-bottom: 0.75rem;
-        }
-
-        .links-list li:last-child {
-            margin-bottom: 0;
-        }
-
-        a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 3rem;
-            font-size: 0.8rem;
-            color: var(--text-muted);
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 32px 16px; background: #008080; font-family: "Pixelated MS Sans Serif", Arial, sans-serif; font-size: 11px; -webkit-font-smoothing: none; }
+        main { width: 100%; max-width: 440px; margin: 0 auto; }
+        .window { margin-bottom: 24px; }
+        /* Keep the library's native 11px size for its pixel font. */
+        .window-body { margin: 20px; line-height: 1.5; }
+        .title-bar-text { margin: 0; font-size: inherit; }
+        h1 { margin: 0 0 8px; font-size: 22px; }
+        .subtitle { margin: 0; }
+        .window-body > p:first-child { margin-top: 0; }
+        .window-body > p:last-child { margin-bottom: 0; }
+        .field-border { padding: 16px; }
+        .field-border p { margin: 0; }
+        .skills-list { margin: 0; list-style: none; padding-left: 0; }
+        .skills-list li + li { margin-top: 8px; }
+        .links-list { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+        .contact-button { min-width: 90px; padding: 4px 12px; }
+        a { overflow-wrap: anywhere; }
+        a:focus-visible { outline: 2px dotted #000; outline-offset: 3px; }
+        .status-bar-field { padding: 4px 8px; }
+        footer { color: #fff; text-align: center; }
+        @media (max-width: 480px) {
+            body { padding: 16px 8px; }
+            .window-body { margin: 14px; }
+            .status-bar { flex-wrap: wrap; }
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <header>
-            <h1>Luciano Leggieri</h1>
-            <p class="subtitle">Software Engineering & Architecture</p>
+    <main>
+        <header class="window">
+            <div class="title-bar">
+                <div class="title-bar-text">Luciano Leggieri — Portfolio</div>
+            </div>
+            <div class="window-body">
+                <h1>Luciano Leggieri</h1>
+                <p class="subtitle">Software Engineer</p>
+            </div>
+            <div class="status-bar">
+                <p class="status-bar-field">Distributed Systems</p>
+                <p class="status-bar-field">Platform Infrastructure</p>
+            </div>
         </header>
 
-        <main>
-            <!-- About Me Section -->
-            <section class="card">
-                <h2>About Me</h2>
+        <section class="window" aria-labelledby="about-title">
+            <div class="title-bar">
+                <h2 class="title-bar-text" id="about-title">About Me</h2>
+            </div>
+            <div class="window-body">
                 <p>Hello! I am a software engineer focused on building highly scalable architectures, distributed systems, and platform infrastructure. I enjoy designing clean, robust systems and exploring emerging technologies.</p>
-                <p>Beyond writing core production software, my interests extend to systems programming, running self-hosted environments, photography, and exploring local artificial intelligence applications.</p>
-            </section>
-
-            <!-- Technical Skills Section -->
-            <section class="card">
-                <h2>Core Expertise</h2>
-                <div class="skills-grid">
-                    <span class="skill-tag">Distributed Systems</span>
-                    <span class="skill-tag">Platform Architecture</span>
-                    <span class="skill-tag">Microservices</span>
-                    <span class="skill-tag">Linux / Debian</span>
-                    <span class="skill-tag">Backend Infrastructure</span>
+                <div class="field-border">
+                    <p>Beyond writing core production software, my interests extend to systems programming, running self-hosted environments, photography, and exploring local artificial intelligence applications.</p>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Contact / Links Section -->
-            <section class="card">
-                <h2>Connect With Me</h2>
-                <ul class="links-list">
-                    <li>GitHub: <a href="https://github.com/lukiano" target="_blank" rel="noopener noreferrer">@your-username</a></li>
-                    <li>LinkedIn: <a href="https://www.linkedin.com/in/lucianoleggieri/" target="_blank" rel="noopener noreferrer">://linkedin.com</a></li>
-                    <li>Email: <a href="mailto:luciano@lucianoleggieri.com">your-alias@yourdomain.com</a></li>
+        <section class="window" aria-labelledby="skills-title">
+            <div class="title-bar">
+                <h2 class="title-bar-text" id="skills-title">Core Expertise</h2>
+            </div>
+            <div class="window-body">
+                <ul class="skills-list">
+                    <li><input type="checkbox" id="skill-distributed" checked><label for="skill-distributed">Distributed Systems</label></li>
+                    <li><input type="checkbox" id="skill-platform" checked><label for="skill-platform">Platform Architecture</label></li>
+                    <li><input type="checkbox" id="skill-microservices" checked><label for="skill-microservices">Microservices</label></li>
+                    <li><input type="checkbox" id="skill-linux" checked><label for="skill-linux">Linux</label></li>
+                    <li><input type="checkbox" id="skill-backend" checked><label for="skill-backend">Backend Infrastructure</label></li>
                 </ul>
-            </section>
-        </main>
+            </div>
+        </section>
 
-        <footer>
-            <p>&copy; 2026 Luciano Leggieri</p>
-        </footer>
-    </div>
-
+        <section class="window" aria-labelledby="contact-title">
+            <div class="title-bar">
+                <h2 class="title-bar-text" id="contact-title">Connect With Me</h2>
+            </div>
+            <div class="window-body">
+                <ul class="links-list">
+                    <li><button type="button" class="contact-button" data-url="https://github.com/lukiano" aria-label="GitHub (opens in a new tab or window)">GitHub</button></li>
+                    <li><button type="button" class="contact-button" data-url="https://www.linkedin.com/in/lucianoleggieri/" aria-label="LinkedIn (opens in a new tab or window)">LinkedIn</button></li>
+                    <li><button type="button" class="contact-button" data-url="mailto:luciano@lucianoleggieri.com" aria-label="Email Luciano (opens your email app)">Email</button></li>
+                </ul>
+            </div>
+        </section>
+        <footer><p>&copy; 2026 Luciano Leggieri</p></footer>
+    </main>
+    <script>
+        document.querySelectorAll('.contact-button').forEach((button) => {
+            button.addEventListener('click', () => {
+                window.open(button.dataset.url, '_blank', 'noopener,noreferrer');
+            });
+        });
+    </script>
 </body>
 </html>
