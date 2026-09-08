@@ -33,9 +33,12 @@
         .project-folder { display: flex; flex-direction: column; align-items: center; gap: 6px; color: #000; width: 110px; text-align: center; text-decoration: none; }
         .project-folder:hover span, .project-folder:focus-visible span { background: #000080; color: #fff; }
         .project-folder span { padding: 2px 4px; }
-        .project-details { margin-top: 16px; scroll-margin-top: 16px; }
-        .project-details summary { cursor: pointer; }
-        .project-details p { margin: 12px 0; }
+        button.project-folder { background: transparent; border: 0; box-shadow: none; text-shadow: none; font: inherit; padding: 0; cursor: pointer; }
+        .work-dialog { width: min(520px, calc(100% - 32px)); max-height: calc(100dvh - 32px); margin: auto; border: 0; color: var(--text-color); overflow-y: auto; }
+        .work-dialog::backdrop { background: rgb(0 0 0 / 35%); }
+        .work-dialog .title-bar { position: sticky; top: 0; }
+        .work-dialog .window-body p { margin: 12px 0; }
+        .dialog-actions { display: flex; justify-content: flex-end; margin-top: 20px; }
         .taskbar { position: fixed; z-index: 10; bottom: 0; left: 0; right: 0; display: flex; align-items: center; gap: 6px; padding: 4px; background: var(--surface); box-shadow: inset 0 1px #fff; }
         .taskbar button { display: flex; align-items: center; gap: 6px; height: 28px; }
         .start-button { font-weight: bold; }
@@ -109,40 +112,63 @@
             <div class="window-body">
                 <div class="explorer-address"><span>Address</span><div class="field-border">C:&#92;Portfolio&#92;Selected Work</div></div>
                 <div class="field-border project-grid">
-                    <a class="project-folder" href="#loom-project" data-project="loom-project"><img class="pixel-icon" src="assets/icons/folder.svg" alt="" width="32" height="32"><span>Loom Data Residency</span></a>
-                    <a class="project-folder" href="#media-project" data-project="media-project"><img class="pixel-icon" src="assets/icons/folder.svg" alt="" width="32" height="32"><span>Atlassian Media Platform</span></a>
-                    <a class="project-folder" href="#storage-project" data-project="storage-project"><img class="pixel-icon" src="assets/icons/folder.svg" alt="" width="32" height="32"><span>Storage Modernization</span></a>
-                    <a class="project-folder" href="#portfolio-project" data-project="portfolio-project"><img class="pixel-icon" src="assets/icons/folder.svg" alt="" width="32" height="32"><span>This portfolio</span></a>
-                    <a class="project-folder" href="https://github.com/lukiano?tab=repositories" target="_blank" rel="noopener noreferrer" aria-label="GitHub repositories (opens in a new tab or window)"><img class="pixel-icon" src="assets/icons/folder.svg" alt="" width="32" height="32"><span>GitHub repositories</span></a>
+                    <button type="button" class="project-folder" data-project="loom-project" aria-haspopup="dialog" aria-controls="loom-project"><img class="pixel-icon" src="assets/icons/folder.svg" alt="" width="32" height="32"><span>Loom Data Residency</span></button>
+                    <button type="button" class="project-folder" data-project="media-project" aria-haspopup="dialog" aria-controls="media-project"><img class="pixel-icon" src="assets/icons/folder.svg" alt="" width="32" height="32"><span>Atlassian Media Platform</span></button>
+                    <button type="button" class="project-folder" data-project="storage-project" aria-haspopup="dialog" aria-controls="storage-project"><img class="pixel-icon" src="assets/icons/folder.svg" alt="" width="32" height="32"><span>Storage Modernization</span></button>
+                    <button type="button" class="project-folder" data-project="portfolio-project" aria-haspopup="dialog" aria-controls="portfolio-project"><img class="pixel-icon" src="assets/icons/folder.svg" alt="" width="32" height="32"><span>This portfolio</span></button>
                 </div>
-                <details class="project-details" id="loom-project">
-                    <summary>Loom Data Residency</summary>
+                <dialog class="window work-dialog" id="loom-project" aria-labelledby="loom-project-title">
+                    <div class="title-bar">
+                        <h2 class="title-bar-text" id="loom-project-title">Loom Data Residency</h2>
+                        <div class="title-bar-controls"><button type="button" aria-label="Close" data-close-dialog></button></div>
+                    </div>
+                    <div class="window-body">
                     <p><strong>Atlassian · Staff Software Engineer · 2024–2026</strong></p>
                     <p><strong>The problem:</strong> Deliver data residency for Loom Enterprise customers while keeping services available throughout the migration.</p>
                     <p><strong>My contribution:</strong> Led a cross-functional team of eight engineers to migrate structured and binary data across compliant storage systems holding petabytes of data.</p>
                     <p><strong>The outcome:</strong> Delivered enterprise data residency through zero-downtime data migration.</p>
-                </details>
-                <details class="project-details" id="media-project">
-                    <summary>Atlassian Media Platform</summary>
+                        <form method="dialog" class="dialog-actions"><button autofocus>Close</button></form>
+                    </div>
+                </dialog>
+                <dialog class="window work-dialog" id="media-project" aria-labelledby="media-project-title">
+                    <div class="title-bar">
+                        <h2 class="title-bar-text" id="media-project-title">Atlassian Media Platform</h2>
+                        <div class="title-bar-controls"><button type="button" aria-label="Close" data-close-dialog></button></div>
+                    </div>
+                    <div class="window-body">
                     <p><strong>Atlassian · Staff Software Engineer · 2018–2024</strong></p>
                     <p><strong>The problem:</strong> Evolve a media platform storing petabytes on S3 and handling millions of daily requests while meeting product and enterprise compliance requirements.</p>
                     <p><strong>My contribution:</strong> Served as platform architect, owned the technical vision, and drove the formation of a team to build a compliance-enabled binary storage solution.</p>
                     <p><strong>The outcome:</strong> Enabled data residency for enterprise customers and the onboarding of several European customers.</p>
-                </details>
-                <details class="project-details" id="storage-project">
-                    <summary>Storage Modernization</summary>
+                        <form method="dialog" class="dialog-actions"><button autofocus>Close</button></form>
+                    </div>
+                </dialog>
+                <dialog class="window work-dialog" id="storage-project" aria-labelledby="storage-project-title">
+                    <div class="title-bar">
+                        <h2 class="title-bar-text" id="storage-project-title">Storage Modernization</h2>
+                        <div class="title-bar-controls"><button type="button" aria-label="Close" data-close-dialog></button></div>
+                    </div>
+                    <div class="window-body">
                     <p><strong>Atlassian · Senior Software Engineer · 2014–2018</strong></p>
                     <p><strong>The problem:</strong> Modernize a high-availability storage service while preserving availability and performance.</p>
                     <p><strong>My contribution:</strong> Architected and delivered the original Scala/JVM service, then led its full migration to a TypeScript/Node.js microservices architecture.</p>
                     <p><strong>The outcome:</strong> Completed the migration with zero downtime and no performance regression.</p>
-                </details>
-                <details class="project-details" id="portfolio-project">
-                    <summary>This portfolio — details</summary>
+                        <form method="dialog" class="dialog-actions"><button autofocus>Close</button></form>
+                    </div>
+                </dialog>
+                <dialog class="window work-dialog" id="portfolio-project" aria-labelledby="portfolio-project-title">
+                    <div class="title-bar">
+                        <h2 class="title-bar-text" id="portfolio-project-title">This portfolio — details</h2>
+                        <div class="title-bar-controls"><button type="button" aria-label="Close" data-close-dialog></button></div>
+                    </div>
+                    <div class="window-body">
                     <p>A Windows 98-inspired personal website, built with HTML, 98.css, and JavaScript.</p>
                     <a href="https://github.com/lukiano/lukiano.github.io" target="_blank" rel="noopener noreferrer">View repository (opens in a new tab or window)</a>
-                </details>
+                        <form method="dialog" class="dialog-actions"><button autofocus>Close</button></form>
+                    </div>
+                </dialog>
             </div>
-            <div class="status-bar"><p class="status-bar-field">5 objects</p><p class="status-bar-field">Select a folder to explore</p></div>
+            <div class="status-bar"><p class="status-bar-field">4 objects</p><p class="status-bar-field">Select a folder to explore</p></div>
         </section>
 
         <section class="window" id="contact" aria-labelledby="contact-title">
@@ -210,8 +236,11 @@
         document.getElementById('portfolio-button').addEventListener('click', () => focusSection('home'));
         document.querySelectorAll('[data-project]').forEach((folder) => {
             folder.addEventListener('click', () => {
-                document.getElementById(folder.dataset.project).open = true;
+                document.getElementById(folder.dataset.project).showModal();
             });
+        });
+        document.querySelectorAll('[data-close-dialog]').forEach((button) => {
+            button.addEventListener('click', () => button.closest('dialog').close());
         });
         const clock = document.getElementById('clock');
         function updateClock() {
