@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Luciano Leggieri — Staff Software Engineer specializing in distributed platforms, petabyte-scale storage, and enterprise data residency.">
     <title>Luciano Leggieri | Portfolio</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
     <link rel="stylesheet" href="https://unpkg.com/98.css" />
     <style>
         /* The distributed 98.css inlines its colors and borders, so custom UI needs its own tokens. */
@@ -25,6 +26,8 @@
         .window-body { margin: 20px; line-height: 1.5; }
         .title-bar-text { margin: 0; font-size: inherit; }
         h1 { margin: 0 0 8px; font-size: 22px; }
+        .profile-heading { display: flex; align-items: center; gap: 16px; }
+        .portrait { width: 88px; height: auto; flex-shrink: 0; padding: 3px; background: var(--surface); box-shadow: var(--border-sunken-outer), var(--border-sunken-inner); }
         .about-trigger { all: unset; font: inherit; color: inherit; cursor: help; }
         .about-trigger:focus-visible { outline: 1px dotted #000; outline-offset: 4px; }
         .system-heading { display: flex; align-items: center; gap: 16px; }
@@ -91,9 +94,12 @@
             <div class="title-bar">
                 <div class="title-bar-text">Luciano Leggieri — Portfolio</div>
             </div>
-            <div class="window-body">
-                <h1><button type="button" class="about-trigger" id="about-computer-trigger" aria-haspopup="dialog" aria-controls="about-computer" aria-label="Luciano Leggieri — About this computer" title="Double-click for About this computer">Luciano Leggieri</button></h1>
-                <p class="subtitle">Staff Software Engineer · Distributed Systems &amp; Platforms</p>
+            <div class="window-body profile-heading">
+                <img class="portrait" src="assets/portrait.jpg" alt="Portrait of Luciano Leggieri" width="281" height="320">
+                <div>
+                    <h1><button type="button" class="about-trigger" id="about-computer-trigger" aria-haspopup="dialog" aria-controls="about-computer" aria-label="Luciano Leggieri — About this computer" title="Double-click for About this computer">Luciano Leggieri</button></h1>
+                    <p class="subtitle">Staff Software Engineer · Distributed Systems &amp; Platforms</p>
+                </div>
             </div>
             <div class="status-bar">
                 <p class="status-bar-field">Distributed Systems</p>
