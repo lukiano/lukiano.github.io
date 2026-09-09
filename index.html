@@ -74,6 +74,16 @@
             .status-bar { flex-wrap: wrap; }
         }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RZ93NGYSJJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-RZ93NGYSJJ');
+    </script>
 </head>
 <body>
     <main>
@@ -231,6 +241,16 @@
         <time class="taskbar-clock" id="clock" aria-label="Your local time"></time>
     </div>
     <script>
+        function trackButtonClick(event) {
+            const button = event.currentTarget;
+            gtag('event', 'button_click', {
+                button_name: button.getAttribute('aria-label') || button.textContent.trim(),
+                button_context: button.closest('[id]')?.id || 'page',
+            });
+        }
+        document.querySelectorAll('button').forEach((button) => {
+            button.addEventListener('click', trackButtonClick);
+        });
         const startButton = document.getElementById('start-button');
         const startMenu = document.getElementById('start-menu');
         function setStartOpen(open) {
