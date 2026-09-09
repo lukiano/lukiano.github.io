@@ -280,17 +280,19 @@
             section.focus({ preventScroll: true });
             section.scrollIntoView({ block: 'start' });
         }
+        function navigateToSection(event) {
+            setStartOpen(false);
+            focusSection(event.currentTarget.hash.slice(1));
+        }
         startMenu.querySelectorAll('a').forEach((link) => {
-            link.addEventListener('click', () => {
-                setStartOpen(false);
-                focusSection(link.hash.slice(1));
-            });
+            link.addEventListener('click', navigateToSection);
         });
         document.getElementById('portfolio-button').addEventListener('click', () => focusSection('home'));
+        function openProject(event) {
+            document.getElementById(event.currentTarget.dataset.project).showModal();
+        }
         document.querySelectorAll('[data-project]').forEach((folder) => {
-            folder.addEventListener('click', () => {
-                document.getElementById(folder.dataset.project).showModal();
-            });
+            folder.addEventListener('click', openProject);
         });
         const aboutComputerTrigger = document.getElementById('about-computer-trigger');
         const aboutComputer = document.getElementById('about-computer');
@@ -299,8 +301,11 @@
         aboutComputerTrigger.addEventListener('click', (event) => {
             if (event.detail === 0) aboutComputer.showModal();
         });
+        function closeDialog(event) {
+            event.currentTarget.closest('dialog').close();
+        }
         document.querySelectorAll('[data-close-dialog]').forEach((button) => {
-            button.addEventListener('click', () => button.closest('dialog').close());
+            button.addEventListener('click', closeDialog);
         });
         const clock = document.getElementById('clock');
         function updateClock() {
@@ -311,10 +316,11 @@
         }
         updateClock();
         setInterval(updateClock, 1000);
+        function openContact(event) {
+            window.open(event.currentTarget.dataset.url, '_blank', 'noopener,noreferrer');
+        }
         document.querySelectorAll('.contact-button').forEach((button) => {
-            button.addEventListener('click', () => {
-                window.open(button.dataset.url, '_blank', 'noopener,noreferrer');
-            });
+            button.addEventListener('click', openContact);
         });
     </script>
 </body>
